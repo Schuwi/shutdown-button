@@ -1,0 +1,19 @@
+[project]
+name = "shutdown_button"
+version = "0.1.0"
+description = "Observes GPIO input (e.g. jumper) and triggers shutdown when pin is not LOW (pull-up activated on pin)"
+authors = [{name = "Schuwi", email="schuwi4@gmail.com"}]
+
+requires-python = ">=3.10"
+dependencies = [
+    "RPi.GPIO"
+]
+
+[project.scripts]
+shutdown_button = "shutdown_button:main"
+
+[build-system]
+requires = [
+    "setuptools",
+]
+build-backend = "setuptools.build_meta"

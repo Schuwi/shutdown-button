@@ -1,0 +1,8 @@
+[Unit]
+Description=Check GPIO for shutdown request
+
+[Service]
+ExecStart=/usr/bin/python3 /root/shutdown_button.py
+
+[Install]
+WantedBy=multi-user.target
