@@ -28,7 +28,7 @@
       dependencies = [ py3Packages.rpi-gpio ];
     };
 
-    nixosModules.default = { config } : let
+    nixosModules.default = { config, ... } : let
       pkg = self.packages.${system}.default;
     in {
       imports = [
