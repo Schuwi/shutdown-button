@@ -31,7 +31,7 @@
     nixosModules.default = { config, ... } : let
       pkg = self.packages.${config.system}.default;
     in {
-      imports = [
+      environment.systemPackages = [
         builtins.trace self pkg
       ];
 
