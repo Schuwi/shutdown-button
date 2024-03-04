@@ -28,8 +28,8 @@
       dependencies = [ py3Packages.rpi-gpio ];
     };
 
-    nixosModules.default = { config, ... } : let
-      pkg = self.packages.${config.system}.default;
+    nixosModules.default = { config, lib, ... } : let
+      pkg = lib.callPackage self.packages.${config.system}.default {};
     in {
       config = {
         environment.systemPackages = [
