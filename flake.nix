@@ -31,11 +31,11 @@
     nixosModules.default = { config, ... } : let
       pkg = self.packages.${config.system}.default;
     in {
-      environment.systemPackages = [
-        builtins.trace self pkg
-      ];
-
       config = {
+        environment.systemPackages = [
+          builtins.trace self pkg
+        ];
+        
         systemd.services.shutdownButton = {
           wantedBy = [ "multi-user.target" ];
 
