@@ -12,7 +12,8 @@
     ...
   } : let
     system = "aarch64-linux";
-    python = nixpkgs.legacyPackages.${system}.python3;
+    pkgs = nixpkgs.legacyPackages.${system};
+    python = pkgs.python3;
     py3Packages = python.pkgs;
     pyproject = nixpkgs.lib.importTOML (./. + /pyproject.toml);
   in {
@@ -25,7 +26,17 @@
 
       build-system = [ py3Packages.setuptools ];
 
-      dependencies = [ py3Packages.rpi-gpio2 ];
+      dependencies = [
+        (py3Packages.rpi-gpio2.overrideAttrs {
+          # temporary fix until https://github.com/NixOS/nixpkgs/issues/263759 is resolved
+          # from https://github.com/NixOS/nixpkgs/commit/6421f070e393e62e918a9330a41c9ac41f2bf914
+          propagatedBuildInputs = [ python (py3Packages.toPythonModule (pkgs.libgpiod_1.override {
+            enablePython = true;
+            python3 = python;
+          })) ];
+        })
+      ];
+      # dependencies = [ py3Packages.rpi-gpio2 ];
     };
 
     nixosModules.default = { pkgs, ... } : let
