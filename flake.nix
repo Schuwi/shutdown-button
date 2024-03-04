@@ -39,9 +39,9 @@ in {
         ];
         
         systemd.services.shutdownButton = {
+          inherit description;
+          
           wantedBy = [ "multi-user.target" ];
-
-          description = description;
 
           serviceConfig = {
             ExecStart = "${pkg}/bin/shutdown_button";
