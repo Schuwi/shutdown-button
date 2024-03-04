@@ -11,7 +11,7 @@
     nixpkgs,
     ...
   } : let
-    system = "x86_64-linux";
+    system = "aarch64-linux";
     python = nixpkgs.legacyPackages.${system}.python3;
     py3Packages = python.pkgs;
     pyproject = nixpkgs.lib.importTOML (./. + /pyproject.toml);
@@ -29,7 +29,7 @@
     };
 
     nixosModules.default = { config, ... } : let
-      pkg = self.packages.${system}.default;
+      pkg = self.packages.${config.system}.default;
     in {
       imports = [
         builtins.trace self pkg
