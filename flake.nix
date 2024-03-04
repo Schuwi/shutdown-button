@@ -30,10 +30,10 @@
 
     nixosModules.default = { config, pkgs, ... } : let
       pkg = pkgs.callPackage self.packages.${config.system}.default {};
-    in {
+    in builtins.trace self {
       config = {
         environment.systemPackages = [
-          builtins.trace self pkg
+          builtins.trace "pkg" pkg
         ];
         
         systemd.services.shutdownButton = {
