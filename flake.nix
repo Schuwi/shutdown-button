@@ -1,7 +1,5 @@
-let
-description = "Observes GPIO input (e.g. jumper) and triggers shutdown when pin is not LOW (pull-up activated on pin)";
-in {
-  inherit description;
+{
+  description = "Observes GPIO input (e.g. jumper) and triggers shutdown when pin is not LOW (pull-up activated on pin)";
 
   inputs.flake-compat = {
     url = "github:edolstra/flake-compat";
@@ -39,8 +37,8 @@ in {
         ];
         
         systemd.services.shutdownButton = {
-          inherit description;
-          
+          description = "Observes GPIO input (e.g. jumper) and triggers shutdown when pin is not LOW (pull-up activated on pin)";
+
           wantedBy = [ "multi-user.target" ];
 
           serviceConfig = {
