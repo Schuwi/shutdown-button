@@ -33,7 +33,7 @@
     in builtins.trace self {
       config = {
         environment.systemPackages = [
-          builtins.trace "pkg" pkg
+          (builtins.trace pkg pkg)
         ];
         
         systemd.services.shutdownButton = {
