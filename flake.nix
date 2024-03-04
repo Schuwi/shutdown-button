@@ -25,7 +25,7 @@
 
       build-system = [ py3Packages.setuptools ];
 
-      dependencies = [ py3Packages.rpi-gpio ];
+      dependencies = [ py3Packages.rpi-gpio2 ];
     };
 
     nixosModules.default = { pkgs, ... } : let
