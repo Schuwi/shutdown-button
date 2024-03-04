@@ -28,8 +28,8 @@
       dependencies = [ py3Packages.rpi-gpio ];
     };
 
-    nixosModules.default = { config, pkgs, ... } : let
-      pkg = pkgs.callPackage self.packages.${config.system}.default {};
+    nixosModules.default = { pkgs, ... } : let
+      pkg = self.packages.${pkgs.stdenv.hostPlatform.system}.default;
     in builtins.trace self {
       config = {
         environment.systemPackages = [
