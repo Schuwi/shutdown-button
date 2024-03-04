@@ -29,7 +29,7 @@
     };
 
     nixosModules.default = { pkgs, ... } : let
-      pkg = self.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      pkg = builtins.trace pkgs.stdenv.hostPlatform.system self.packages.${pkgs.stdenv.hostPlatform.system}.default;
     in builtins.trace self {
       config = {
         environment.systemPackages = [
