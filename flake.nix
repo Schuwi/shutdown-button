@@ -29,11 +29,11 @@
     };
 
     nixosModules.default = { pkgs, ... } : let
-      pkg = builtins.trace pkgs.stdenv.hostPlatform.system self.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    in builtins.trace self {
+      pkg = self.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    in {
       config = {
         environment.systemPackages = [
-          (builtins.trace pkg pkg)
+          pkg
         ];
         
         systemd.services.shutdownButton = {
