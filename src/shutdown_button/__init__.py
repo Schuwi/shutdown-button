@@ -48,4 +48,4 @@ def main():
             wait_for_edge_event(request, EdgeEvent.Type.RISING_EDGE)
         
         print("Shutting down system...")
-        os.system("/sbin/shutdown -h now")
+        os.system("shutdown -h now")
