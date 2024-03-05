@@ -1,5 +1,5 @@
 import gpiod
-from gpiod import edge_event
+from gpiod.edge_event import EdgeEvent
 from gpiod.line import Bias, Direction, Edge, Value
 from datetime import timedelta
 import time
@@ -36,16 +36,16 @@ def main():
         print("Waiting for pin to be LOW")
 
         # clear events before value check to avoid race condition
-        clear_events()
-        while GPIO.get_value(LINE) == Value.ACTIVE:
-            wait_for_edge_event(edge_event.Type.FALLING_EDGE)
+        clear_events(request)
+        while request.get_value(LINE) == Value.ACTIVE:
+            wait_for_edge_event(request, EdgeEvent.Type.FALLING_EDGE)
         
         print("Waiting for shutdown request (pin HIGH)")
         time.sleep(1)
         # wait for shutdown request
-        clear_events()
-        while GPIO.get_value(LINE) == Value.INACTIVE:
-            wait_for_edge_event(edge_event.Type.RISING_EDGE)
+        clear_events(request)
+        while request.get_value(LINE) == Value.INACTIVE:
+            wait_for_edge_event(request, EdgeEvent.Type.RISING_EDGE)
         
         print("Shutting down system...")
         os.system("/sbin/shutdown -h now")
