@@ -1,4 +1,5 @@
-from gpiod import self, edge_event
+import gpiod
+from gpiod import edge_event
 from gpiod.line import Bias, Direction, Edge, Value
 from datetime import timedelta
 import time
